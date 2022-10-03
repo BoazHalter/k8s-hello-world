@@ -6,6 +6,7 @@ K8S Hello-world Is a GitHub repo that demonstrate a simple hello world applicati
 ## Prerequisites
 - kubernetes cluster
 - helm 
+- `kubectl create ns sample1`
 
 ## Into the chart
 
