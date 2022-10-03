@@ -1,15 +1,31 @@
-![Getting Started with Containers and Kubernetes Header Image](https://github.com/do-community/k8s-intro-meetup-kit/blob/master/header.png?raw=true)
+# K8S Hello-world 
+
+## Overview
+K8S Hello-world Is a GitHub repo that demonstrate a simple hello world application deployed on top of k8s using helm chart.
 
 
-# Getting Started with Containers and Kubernetes: A DigitalOcean Meetup Kit
+## Into the chart
 
-This repository equips a speaker with the materials necessary to deliver a roughly 45-minute-long introductory talk on containers and Kubernetes.
+The application chart values.yaml contains more values the following are just sample.
 
-## Materials
+|  Chart key         |             Chart value                   |    Description                                          |
+|--------------------|-------------------------------------------|---------------------------------------------------------|
+|  `replicaCount`    |                 `1`                       | the number of pods to run                               |
+|  `app.link`        | `github.com/BoazHalter/k8s-hello-world`   | the redirect link                                       |
+|  `app.route`       | `"/sample/"`                              | the path to app                                         |
+|  `image.repository`| `digitalocean/flask-helloworld`           | the container image repo                                |
+|  `image.tag`       | `"latest"`                                | the container image version                             |
+|  `service.type`    | `LoadBalancer`                            | k8s service type Loadbalancer enable www inbound traffic|
+|  `service.port`    | `80,443`                                  | k8s service type Loadbalancer port to listen            |
 
-The meetup kit includes the following resources:
+## Using ConfigMap
 
-- The "Getting Started with Containers and Kubernetes" [Slides and speaker notes](https://docs.google.com/presentation/d/1-T5uWKp3vT6g7bN8BhYJxI4hOjcnVtVHIoezh3rFtaY/edit?usp=sharing) with commands for running a live demo
-- This [GitHub repository](https://github.com/do-community/k8s-intro-meetup-kit) containing the demo app code
-- A "Getting Started with Containers and Kubernetes" [DigitalOcean tutorial](https://www.digitalocean.com/community/meetup_kits/getting-started-with-containers-and-kubernetes-a-digitalocean-meetup-kit), which walks a user through rolling out the demo "Hello World" [Flask](https://www.palletsprojects.com/p/flask/) app on a [DigitalOcean Kubernetes](https://www.digitalocean.com/products/kubernetes/) cluster.
-- The Flask demo app [Docker Hub repository](https://hub.docker.com/repository/docker/digitalocean/flask-helloworld)
+ConfigMap is mounted as file app.py that enable configuration of:
+  - app.link 
+  - app.route
+
+Installing the chart <br />
+`helm install khw -n sample1 k8s-hello-world-chart/ --set replicaCount=2`
+
+Deleting the chart <br />
+`helm del -n sample1 khw`
