@@ -10,6 +10,6 @@ spec:
     - port: {{ .Values.service.port }}
       targetPort: 5000
       protocol: TCP
-      name: http
+      name: https
   selector:
     {{- include "k8s-hello-world.selectorLabels" . | nindent 4 }}
